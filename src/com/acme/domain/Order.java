@@ -3,56 +3,55 @@ package com.acme.domain;
 import com.acme.utils.MyDate;
 
 public class Order {
-	MyDate orderDate;
-	double orderAmount = 0.00;
-	String customer;
-	String product;
-	char jobClassification;
-	int quantity;
-	public static double taxRate;
-	
+	private MyDate orderDate;
+	private double orderAmount = 0.00;
+	private String customer;
+	private String product;
+	private char jobClassification;
+	private int quantity;
+	private static double taxRate;
+
 	// BONUS
 	static {
 		taxRate = 0.05;
 	}
-	
-	public Order(MyDate date, double orderAmount, String customer, String product, int quantity){
-		this.orderDate=date;
-		this.orderAmount=orderAmount;
-		this.customer=customer;
-		this.product=product;
-		this.quantity=quantity;
+
+	public Order(MyDate date, double orderAmount, String customer, String product, int quantity) {
+		this.orderDate = date;
+		this.orderAmount = orderAmount;
+		this.customer = customer;
+		this.product = product;
+		this.quantity = quantity;
 	}
-		
+
 	// BONUS
-	public Order(MyDate date, double orderAmount, String customer){
-		this.orderDate=date;
-		this.orderAmount=orderAmount;
-		this.customer=customer;
-		this.product="Anvil";
-		this.quantity=1;
+	public Order(MyDate date, double orderAmount, String customer) {
+		this.orderDate = date;
+		this.orderAmount = orderAmount;
+		this.customer = customer;
+		this.product = "Anvil";
+		this.quantity = 1;
 	}
-	
-	
-	public String toString(){
-		return quantity + " ea. " + product + " for " + customer; 
+
+	public String toString() {
+		return quantity + " ea. " + product + " for " + customer;
 	}
-	
+
 	public static void setTaxRate(double newTaxRate) {
 		taxRate = newTaxRate;
 	}
-	
+
 	public static void calculateTaxOn(double amountToTax) {
 		final double taxedAmount = amountToTax * taxRate;
 		System.out.println("The overall tax for the order is: " + taxedAmount);
 	}
-	
+
 	public double calculateTax() {
 		final double taxedAmount = this.orderAmount * taxRate;
 		System.out.println("The overall tax for the order is: " + taxedAmount);
 		return taxedAmount;
 	}
-	
+
 	public char jobSize() {
 		char newClassification = 0;
 
@@ -64,7 +63,7 @@ public class Order {
 			newClassification = 'L';
 		} else if (this.quantity > 150) {
 			newClassification = 'X';
-		}			
+		}
 		return newClassification;
 	}
 
@@ -89,8 +88,76 @@ public class Order {
 		if (this.orderAmount <= 1500.0) {
 			finalAmount = finalAmount + calculateTax();
 		}
-		
 
 		return finalAmount;
-	}	
+	}
+
+	private boolean isPosotiveValue(int valueToCheck) {
+		boolean isValid = false;
+		
+		if(valueToCheck >= 0) {
+			isValid = true;
+		} else {
+			System.out.println("The value is negative failed needs to be positive.");
+		}
+		
+		return isValid;
+	}
+	
+	public MyDate getOrderDate() {
+		return orderDate;
+	}
+
+	public void setOrderDate(final MyDate orderDate) {
+		this.orderDate = orderDate;
+	}
+
+	public double getOrderAmount() {
+		return orderAmount;
+	}
+
+	public void setOrderAmount(final double orderAmount) {
+		if (isPosotiveValue((int) orderAmount)) {
+			this.orderAmount = orderAmount;
+		}
+	}
+
+	public String getCustomer() {
+		return customer;
+	}
+
+	public void setCustomer(final String customer) {
+		this.customer = customer;
+	}
+
+	public String getProduct() {
+		return product;
+	}
+
+	public void setProduct(final String product) {
+		this.product = product;
+	}
+
+	public char getJobClassification() {
+		return jobClassification;
+	}
+
+	public void setJobClassification(final char jobClassification) {
+		this.jobClassification = jobClassification;
+	}
+
+	public int getQuantity() {
+		return quantity;
+	}
+
+	public void setQuantity(final int quantity) {
+		if (isPosotiveValue(quantity)) {
+			this.quantity = quantity;
+		}
+	}
+
+	public static double getTaxRate() {
+		return taxRate;
+	}
+	
 }
