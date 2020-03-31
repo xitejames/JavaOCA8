@@ -3,7 +3,7 @@ package com.acme.utils;
 public class MyDate {
 	private byte day;
 	private byte month;
-	private int year;
+	private short year;
 
 	// INITIALISATION BLOCK - BONUS
 	{
@@ -18,10 +18,8 @@ public class MyDate {
 	 }
 
 
-	public MyDate(int newYear, int newMonth, int newDay) {
-		this.day = (byte) newDay;
-		this.month = (byte) newMonth;
-		this.year = (byte) newYear;
+	public MyDate(int newDay, int newMonth, int newYear) {
+		setDate(newDay, newMonth, newYear);
 	}
 
 //	// How I started to do it
@@ -101,13 +99,13 @@ public class MyDate {
 		}
 	}
 
-	public int getYear() {
+	public short getYear() {
 		return year;
 	}
 
 	public void setYear(final int year) {
 		if (valid(this.day, this.month, year)) {
-			this.year = year;
+			this.year = (short) year;
 		}
 	}
 
@@ -125,7 +123,7 @@ public class MyDate {
 		if (valid(day, month, year)) {
 			this.day = (byte) day;
 			this.month = (byte) month;
-			this.year = year;
+			this.year = (short) year;
 		}
 	}
 
