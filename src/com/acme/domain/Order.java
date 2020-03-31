@@ -19,7 +19,7 @@ public class Order {
 	}
 
 	public Order(MyDate date, double orderAmount, String customer, Product product, int quantity) {
-		this.orderDate = date;
+		setOrderDate(date);
 		this.orderAmount = orderAmount;
 		this.customer = customer;
 		this.product = product;
@@ -28,7 +28,7 @@ public class Order {
 
 	// BONUS
 	public Order(MyDate date, double orderAmount, String customer) {
-		this.orderDate = date;
+		setOrderDate(date);
 		this.orderAmount = orderAmount;
 		this.customer = customer;
 		// create new solid anvil product
@@ -96,26 +96,36 @@ public class Order {
 		return finalAmount;
 	}
 
+	// --- BOOL CHECKS --- //
+	private boolean isHoliday(MyDate proposedDate) {
+		boolean result = false;
+		for (MyDate holiday : MyDate.getHolidays()) {
+			if (holiday.equals(proposedDate)) {
+				result = true;
+			}
+		}
+		return result;
+	}
+
 	private boolean isPosotiveValue(int valueToCheck) {
 		boolean isValid = false;
-		
-		if(valueToCheck >= 0) {
+
+		if (valueToCheck >= 0) {
 			isValid = true;
 		} else {
 			System.out.println("The value is negative failed needs to be positive.");
 		}
-		
+
 		return isValid;
 	}
-	
+
 	// Rushable functional interface
-	public static Rushable getRushable()
-	{
-	 return rushable;
+	public static Rushable getRushable() {
+		return rushable;
 	}
-	public static void setRushable(Rushable rushable)
-	{
-	 Order.rushable = rushable;
+
+	public static void setRushable(Rushable rushable) {
+		Order.rushable = rushable;
 	}
 
 	public boolean isPriorityOrder() {
@@ -125,15 +135,19 @@ public class Order {
 		}
 		return priorityOrder;
 	}
-	
+
 	// --- GETTERS AND SETTERS --- //
-	
+
 	public MyDate getOrderDate() {
 		return orderDate;
 	}
 
-	public void setOrderDate(final MyDate orderDate) {
-		this.orderDate = orderDate;
+	public void setOrderDate(MyDate orderDate) {
+		if (isHoliday(orderDate)) {
+			System.out.println("Order date, " + orderDate + ", cannot be set to a holiday!");
+		} else {
+			this.orderDate = orderDate;
+		}
 	}
 
 	public double getOrderAmount() {
@@ -183,5 +197,5 @@ public class Order {
 	public static double getTaxRate() {
 		return taxRate;
 	}
-	
+
 }

@@ -4,6 +4,7 @@ public class MyDate {
 	private byte day;
 	private byte month;
 	private short year;
+	private static MyDate[] holidays;
 
 	// INITIALISATION BLOCK - BONUS
 	{
@@ -12,11 +13,21 @@ public class MyDate {
 		this.year = 2000;
 	}
 
-	 // The default constructor
-	 public MyDate() {
-	 this(1,1,1900);
-	 }
+	// INITIALISATION BLOCK - ARRAYS LAB
+	static {
+		holidays = new MyDate[6];
+		holidays[0] = new MyDate(1, 1, 2020);
+		holidays[1] = new MyDate(30, 5, 2020);
+		holidays[2] = new MyDate(4, 7, 2020);
+		holidays[3] = new MyDate(5, 9, 2020);
+		holidays[4] = new MyDate(24, 11, 2020);
+		holidays[5] = new MyDate(25, 12, 2020);
+	}
 
+	// The default constructor
+	public MyDate() {
+		this(1, 1, 1900);
+	}
 
 	public MyDate(int newDay, int newMonth, int newYear) {
 		setDate(newDay, newMonth, newYear);
@@ -70,10 +81,11 @@ public class MyDate {
 		return true;
 	}
 
-	// ALTHOUGH WE HAVE OVERIDDEN EQUALS WE HAVE TO DO THE SAME TO HASHCODE 
+	// ALTHOUGH WE HAVE OVERIDDEN EQUALS WE HAVE TO DO THE SAME TO HASHCODE
 	// --------------------------------------------------------------------------------
 	// Overide the equals operator for the myDate object so it implicitly checks
-	// only the values and not that the object is pointing to the same object in memory.
+	// only the values and not that the object is pointing to the same object in
+	// memory.
 	public boolean equals(Object o) {
 		if (o instanceof MyDate) {
 			MyDate d = (MyDate) o;
@@ -87,6 +99,17 @@ public class MyDate {
 	// overided toString() for the myDate object
 	public String toString() {
 		return "The CurrentDate is: " + day + ":" + month + ":" + year;
+	}
+
+	public static MyDate[] getHolidays() {
+		return holidays;
+	}
+
+	public static void listHolidays() {
+		System.out.println("the holidays are:");
+		for (MyDate currentHoliday : holidays) {
+			System.out.println(currentHoliday);
+		}
 	}
 
 	public int getDay() {

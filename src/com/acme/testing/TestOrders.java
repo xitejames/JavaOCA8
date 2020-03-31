@@ -3,7 +3,6 @@ package com.acme.testing;
 import com.acme.domain.Good.UnitOfMeasureType;
 
 import java.time.LocalDate;
-import java.time.LocalTime;
 import java.time.Period;
 
 import com.acme.domain.Order;
@@ -39,7 +38,7 @@ public class TestOrders {
 		System.out.println("The total bill for: " + balloons + " is" + balloons.computeTotal());
 
 		// BONUS
-		MyDate date3 = new MyDate(20, 5, 2008);
+		MyDate date3 = new MyDate(1, 1, 2020);
 		Order anotherAnvil = new Order(date3, 200, "Road Runner");
 		System.out.println(anotherAnvil);
 
