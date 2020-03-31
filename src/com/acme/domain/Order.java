@@ -7,17 +7,18 @@ public class Order {
 	private MyDate orderDate;
 	private double orderAmount = 0.00;
 	private String customer;
-	private Good product;
+	private Product product;
 	private char jobClassification;
 	private int quantity;
 	private static double taxRate;
+	private static Rushable rushable;
 
 	// BONUS
 	static {
 		taxRate = 0.05;
 	}
 
-	public Order(MyDate date, double orderAmount, String customer, Good product, int quantity) {
+	public Order(MyDate date, double orderAmount, String customer, Product product, int quantity) {
 		this.orderDate = date;
 		this.orderAmount = orderAmount;
 		this.customer = customer;
@@ -107,6 +108,26 @@ public class Order {
 		return isValid;
 	}
 	
+	// Rushable functional interface
+	public static Rushable getRushable()
+	{
+	 return rushable;
+	}
+	public static void setRushable(Rushable rushable)
+	{
+	 Order.rushable = rushable;
+	}
+
+	public boolean isPriorityOrder() {
+		boolean priorityOrder = false;
+		if (rushable != null) {
+			priorityOrder = rushable.isRushable(orderDate, orderAmount);
+		}
+		return priorityOrder;
+	}
+	
+	// --- GETTERS AND SETTERS --- //
+	
 	public MyDate getOrderDate() {
 		return orderDate;
 	}
@@ -133,11 +154,11 @@ public class Order {
 		this.customer = customer;
 	}
 
-	public Good getProduct() {
+	public Product getProduct() {
 		return product;
 	}
 
-	public void setProduct(final Good product) {
+	public void setProduct(final Product product) {
 		this.product = product;
 	}
 
