@@ -1,12 +1,13 @@
 package com.acme.domain;
 
+import com.acme.domain.Good.UnitOfMeasureType;
 import com.acme.utils.MyDate;
 
 public class Order {
 	private MyDate orderDate;
 	private double orderAmount = 0.00;
 	private String customer;
-	private String product;
+	private Good product;
 	private char jobClassification;
 	private int quantity;
 	private static double taxRate;
@@ -16,7 +17,7 @@ public class Order {
 		taxRate = 0.05;
 	}
 
-	public Order(MyDate date, double orderAmount, String customer, String product, int quantity) {
+	public Order(MyDate date, double orderAmount, String customer, Good product, int quantity) {
 		this.orderDate = date;
 		this.orderAmount = orderAmount;
 		this.customer = customer;
@@ -29,7 +30,9 @@ public class Order {
 		this.orderDate = date;
 		this.orderAmount = orderAmount;
 		this.customer = customer;
-		this.product = "Anvil";
+		// create new solid anvil product
+		Solid anvilProduct = new Solid("Acme Anvil", 1668, 0.3, UnitOfMeasureType.CUBIC_METER, false, 500, 0.25, 0.3);
+		this.product = anvilProduct;
 		this.quantity = 1;
 	}
 
@@ -130,11 +133,11 @@ public class Order {
 		this.customer = customer;
 	}
 
-	public String getProduct() {
+	public Good getProduct() {
 		return product;
 	}
 
-	public void setProduct(final String product) {
+	public void setProduct(final Good product) {
 		this.product = product;
 	}
 

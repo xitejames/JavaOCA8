@@ -21,13 +21,23 @@ public class TestMyDate {
 		System.out.println(str1);
 		System.out.println(str2);
 		System.out.println(str3);
-		//TEST INIT BLOCK -BONUS
+		// TEST INIT BLOCK -BONUS
 		MyDate date4 = new MyDate();
 		String str4 = date4.toString();
 		System.out.println(str4);
 //		// TEST LAB 5 LEAP YEARS
 //		MyDate.leapYears();
 
+		MyDate newYear = new MyDate(1, 1, 2009);
+		MyDate fiscalStart = new MyDate(1, 1, 2009);
+		// The reason they are not equal as they are objects
+		// The equals operator implicitly checks if they are the same object
+		// even though the values are the same the value the equals is refering to is two seperate
+		// myDatre objcects and its unique hash where it is stored in memory
+		if (newYear.equals(fiscalStart))
+			System.out.println("These two dates are equal");
+		else
+			System.out.println("These two dates are not equal");
 
 	}
 }

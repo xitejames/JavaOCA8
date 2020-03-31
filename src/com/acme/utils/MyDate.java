@@ -72,6 +72,21 @@ public class MyDate {
 		return true;
 	}
 
+	// ALTHOUGH WE HAVE OVERIDDEN EQUALS WE HAVE TO DO THE SAME TO HASHCODE 
+	// --------------------------------------------------------------------------------
+	// Overide the equals operator for the myDate object so it implicitly checks
+	// only the values and not that the object is pointing to the same object in memory.
+	public boolean equals(Object o) {
+		if (o instanceof MyDate) {
+			MyDate d = (MyDate) o;
+			if ((d.day == day) && (d.month == month) && (d.year == year)) {
+				return true;
+			}
+		}
+		return false;
+	}
+
+	// overided toString() for the myDate object
 	public String toString() {
 		return "The CurrentDate is: " + day + ":" + month + ":" + year;
 	}
